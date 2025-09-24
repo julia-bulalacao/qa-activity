@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Create Application Form - Automation Challenge</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-50 p-3 min-h-screen flex items-center justify-center">
+  <main class="w-full max-w-4xl px-6">
+    <div class="bg-white shadow-xl rounded-3xl p-16 text-center border border-gray-200 backdrop-blur-sm">
+
+      <!-- Form GIF -->
+      <div class="flex items-center justify-center mx-auto mb-12">
+        <div class="relative">
+          <img src="https://media.giphy.com/media/xT9IgzoKnwFNmISR8I/giphy.gif"
+               alt="Form Creation Challenge"
+               class="w-32 h-32 rounded-2xl object-cover shadow-lg" />
+          <div class="absolute -top-2 -right-2 w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center shadow-lg">
+            <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clip-rule="evenodd"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Page Title -->
+      <div class="mb-12">
+        <h1 class="text-5xl font-bold text-gray-900 mb-4">
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-blue-600">Ready to Begin!</span>
+        </h1>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+          You're about to access the automation challenge playground featuring advanced form interactions.
+        </p>
+      </div>
+
+      <!-- Instructions -->
+      <div class="bg-gradient-to-br from-slate-50 to-gray-50 border border-gray-200 rounded-2xl p-8 mb-12 shadow-sm text-left">
+        <div class="flex items-center mb-6 flex items-center justify-center">
+          <!-- <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center shadow-lg mr-3">
+            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" clip-rule="evenodd"></path>
+            </svg>
+          </div> -->
+          <h2 class="text-2xl font-bold text-gray-900">Challenge Instructions</h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="flex items-start p-4 bg-white rounded-xl border border-gray-100 shadow-sm">
+            <div class="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center mr-4 mt-1">
+              <span class="text-green-600 font-bold text-sm">✓</span>
+            </div>
+            <div>
+              <h3 class="font-semibold text-gray-900 mb-1">Accurate Data Entry</h3>
+              <p class="text-sm text-gray-600">Fill out all required form fields accurately</p>
+            </div>
+          </div>
+
+          <div class="flex items-start p-4 bg-white rounded-xl border border-gray-100 shadow-sm">
+            <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center mr-4 mt-1">
+              <span class="text-blue-600 font-bold text-sm">✓</span>
+            </div>
+            <div>
+              <h3 class="font-semibold text-gray-900 mb-1">Input Variety</h3>
+              <p class="text-sm text-gray-600">Handle different input types and controls</p>
+            </div>
+          </div>
+
+          <div class="flex items-start p-4 bg-white rounded-xl border border-gray-100 shadow-sm">
+            <div class="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center mr-4 mt-1">
+              <span class="text-purple-600 font-bold text-sm">✓</span>
+            </div>
+            <div>
+              <h3 class="font-semibold text-gray-900 mb-1">File Interactions</h3>
+              <p class="text-sm text-gray-600">Upload files and interact with dynamic elements</p>
+            </div>
+          </div>
+
+          <div class="flex items-start p-4 bg-white rounded-xl border border-gray-100 shadow-sm">
+            <div class="w-8 h-8 bg-orange-100 rounded-lg flex items-center justify-center mr-4 mt-1">
+              <span class="text-orange-600 font-bold text-sm">✓</span>
+            </div>
+            <div>
+              <h3 class="font-semibold text-gray-900 mb-1">Complete Submission</h3>
+              <p class="text-sm text-gray-600">Successfully submit the entire application</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Button -->
+      <div class="flex flex-col sm:flex-row gap-6 justify-center mb-8">
+        <button id="createApplicationBtn" onclick="startChallenge()" class="group relative px-12 py-4 bg-blue-600 text-white text-xl font-bold rounded-xl hover:bg-blue-700 transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl focus:ring-4 focus:ring-blue-200">
+          <span class="flex items-center justify-center">
+            <svg class="w-6 h-6 mr-3 group-hover:translate-x-1 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clip-rule="evenodd"></path>
+            </svg>
+            Create Application Form
+          </span>
+        </button>
+      </div>
+
+      <!-- Back Link -->
+      <div class="border-t pt-6">
+        <p class="text-gray-500">
+          Changed your mind?
+          <a href="index.html" class="text-blue-600 hover:text-blue-800 underline font-medium">Go back to welcome page</a>
+        </p>
+      </div>
+
+    </div>
+  </main>
+
+  <script src="scripts.js"></script>
+
+</body>
+</html>

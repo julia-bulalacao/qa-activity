@@ -1,0 +1,659 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Form Playground - Tailwind</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-white min-h-screen flex items-start justify-center py-8">
+  <main class="w-full max-w-5xl px-6">
+    <header class="mb-10 text-center">
+      <h1 id="form-title" class="text-4xl font-bold text-gray-900 mb-3">
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Form Playground</span>
+      </h1>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+        Complete this comprehensive application form featuring various input types, file uploads, and dynamic form elements.
+      </p>
+    </header>
+
+    <section class="bg-white shadow-lg border border-gray-100 rounded-2xl overflow-hidden" role="main" aria-labelledby="form-title">
+      <div class="p-8">
+        <form id="applicationForm" class="space-y-8">
+
+        <!-- Application Details -->
+        <div class="pb-8 border-b border-gray-200">
+          <h2 class="text-2xl font-bold text-gray-900 mb-6">Application Details</h2>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Type of Application</label>
+              <select id="applicationType" name="applicationType" class="mt-1">
+                <option value="" selected> </option>
+                <option>New</option>
+                <option>Renewal</option>
+                <option>Replacement</option>
+              </select>
+            </div>
+
+            <div class="md:col-span-2">
+              <label class="block text-sm font-medium text-gray-700">Purpose of Application</label>
+              <select id="purpose" name="purpose" class="mt-1">
+                <option value="" selected> </option>
+                <option>Identification</option>
+                <option>Travel</option>
+                <option>Employment</option>
+                <option>Other</option>
+              </select>
+            </div>
+
+            <div class="md:col-span-3">
+              <label class="block text-sm font-medium text-gray-700">Supporting Details</label>
+              <textarea id="supportingDetails" name="supportingDetails" class="mt-1" placeholder="Any extra info..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Personal Information & Address -->
+        <div class="pb-8 border-b border-gray-200">
+          <h2 class="text-2xl font-bold text-gray-900 mb-6">Personal Information & Address</h2>
+          <div class="space-y-6">
+
+            <!-- Title/Prefix Selection -->
+            <div>
+              <div class="flex flex-wrap gap-6">
+                <label class="inline-flex items-center">
+                  <input id="title_ms" type="radio" name="title" value="Ms." class="form-radio text-red-500" />
+                  <span class="ml-2">Ms.</span>
+                </label>
+                <label class="inline-flex items-center">
+                  <input id="title_mr" type="radio" name="title" value="Mr." class="form-radio text-red-500" />
+                  <span class="ml-2">Mr.</span>
+                </label>
+                <label class="inline-flex items-center">
+                  <input id="title_sps" type="radio" name="title" value="Sps." class="form-radio text-red-500" />
+                  <span class="ml-2">Sps</span>
+                </label>
+                <label class="inline-flex items-center">
+                  <input id="title_others" type="radio" name="title" value="Sps." class="form-radio text-red-500" />
+                  <span class="ml-2">Prefer not to say</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Names Row with Middle Name Checkbox -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700">First Name</label>
+                <input id="firstName" type="text" name="firstName" class="mt-1" required />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Last Name</label>
+                <input id="lastName" type="text" name="lastName" class="mt-1" required />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Middle Name</label>
+                <input id="middleName" type="text" name="middleName" class="mt-1" />
+                <div class="mt-2">
+                  <label class="inline-flex items-center text-sm">
+                    <input id="noMiddleName" type="checkbox" class="form-checkbox" />
+                    <span class="ml-2">I don't have middle name</span>
+                  </label>
+                </div>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Suffix</label>
+                <select id="suffix" name="suffix" class="mt-1">
+                  <option value="">N/A</option>
+                  <option>Jr.</option>
+                  <option>Sr.</option>
+                  <option>II</option>
+                  <option>III</option>
+                  <option>IV</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Additional Personal Information -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Date of Birth</label>
+                <input id="dob" type="date" name="dob" class="mt-1" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Place of Birth</label>
+                <input id="placeOfBirth" type="text" name="placeOfBirth" class="mt-1" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Nationality / Citizenship</label>
+                <select id="nationality" name="nationality" class="mt-1">
+                  <option value="" selected> </option>
+                  <option>Filipino</option>
+                  <option>Dual / Other</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Contact Information Row -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Phone No. (+63)</label>
+                <input id="mobileNum" type="tel" name="mobile" class="mt-1" placeholder="9XX-XXX-XXXX" required />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Email Address </label>
+                <input id="emailAdd" type="email" name="email" class="mt-1" required />
+              </div>
+            </div>
+
+            <hr class="mt-5">
+            <h2 class="text-xl font-bold text-gray-900 mb-6">Current Address</h2>
+            <!-- Address Type Selection -->
+            <div>
+              <div class="flex flex-wrap gap-6">
+                <label class="inline-flex items-center">
+                  <input id="addr_home" type="radio" name="addressType" value="Home Address" class="form-radio text-red-500" />
+                  <span class="ml-2">Home Address</span>
+                </label>
+                <label class="inline-flex items-center">
+                  <input id="addr_office" type="radio" name="addressType" value="Office Address" class="form-radio text-red-500" />
+                  <span class="ml-2">Office Address</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Regional Information -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Region</label>
+                <input id="curr_region" name="curr_region" class="mt-1" type="text" required />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Province</label>
+                <input id="curr_province" name="curr_province" class="mt-1" type="text" required />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">City/Municipality</label>
+                <input id="curr_city" name="curr_city" class="mt-1" type="text" required />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Barangay</label>
+                <input id="curr_barangay" name="curr_barangay" class="mt-1" type="text" required />
+              </div>
+            </div>
+
+            <!-- Detailed Address Information -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Lot No.</label>
+                <input id="curr_lot" type="text" name="curr_lot" class="mt-1" />
+                <div class="mt-2">
+                  <label class="inline-flex items-center text-sm">
+                    <input id="lotNotApplicable" type="checkbox" class="form-checkbox" />
+                    <span class="ml-2">Not Applicable</span>
+                  </label>
+                </div>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Block No.</label>
+                <input id="curr_house" type="text" name="curr_house" class="mt-1" />
+                <div class="mt-2">
+                  <label class="inline-flex items-center text-sm">
+                    <input id="blockNotApplicable" type="checkbox" class="form-checkbox" />
+                    <span class="ml-2">Not Applicable</span>
+                  </label>
+                </div>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">House No.</label>
+                <input id="houseNumber" type="text" name="houseNumber" class="mt-1" />
+                <div class="mt-2">
+                  <label class="inline-flex items-center text-sm">
+                    <input id="houseNotApplicable" type="checkbox" class="form-checkbox" />
+                    <span class="ml-2">Not Applicable</span>
+                  </label>
+                </div>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Street address, etc.</label>
+                <input id="curr_street" type="text" name="curr_street" class="mt-1" required />
+              </div>
+            </div>
+
+            <!-- Additional Address Fields -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Unit No./Building Name</label>
+                <input id="unitBuilding" type="text" name="unitBuilding" class="mt-1" />
+                <div class="mt-2">
+                  <label class="inline-flex items-center text-sm">
+                    <input id="unitNotApplicable" type="checkbox" class="form-checkbox" />
+                    <span class="ml-2">Not Applicable</span>
+                  </label>
+                </div>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Subdivision/Village</label>
+                <input id="subdivision" type="text" name="subdivision" class="mt-1" />
+                <div class="mt-2">
+                  <label class="inline-flex items-center text-sm">
+                    <input id="subdivisionNotApplicable" type="checkbox" class="form-checkbox" />
+                    <span class="ml-2">Not Applicable</span>
+                  </label>
+                </div>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">ZIP Code</label>
+                <input id="curr_zip" type="text" name="curr_zip" class="mt-1" placeholder="XXXX" />
+              </div>
+            </div>
+
+            <div class="pb-8 border-b border-gray-200">
+              <h2 class="text-xl font-bold text-gray-900 mb-6">Permanent Address</h2>
+              <div class="flex items-center gap-3 mb-6">
+                <input id="sameAsCurrent" type="checkbox" />
+                <label for="sameAsCurrent" class="text-sm">Same as Current Address</label>
+              </div>
+
+              <!-- Regional Information for Permanent Address -->
+              <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700">Region</label>
+                  <input id="perm_region" name="perm_region" class="mt-1" type="text" />
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700">Province</label>
+                  <input id="perm_province" name="perm_province" class="mt-1" type="text" />
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700">City/Municipality</label>
+                  <input id="perm_city" name="perm_city" class="mt-1" type="text" />
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700">Barangay</label>
+                  <input id="perm_barangay" name="perm_barangay" class="mt-1" type="text" />
+                </div>
+              </div>
+
+              <!-- Detailed Address Information for Permanent Address -->
+              <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700">Lot No.</label>
+                  <input id="perm_lot" type="text" name="perm_lot" class="mt-1" />
+                  <div class="mt-2">
+                    <label class="inline-flex items-center text-sm">
+                      <input id="perm_lotNotApplicable" type="checkbox" class="form-checkbox" />
+                      <span class="ml-2">Not Applicable</span>
+                    </label>
+                  </div>
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700">Block No.</label>
+                  <input id="perm_house" type="text" name="perm_house" class="mt-1" />
+                  <div class="mt-2">
+                    <label class="inline-flex items-center text-sm">
+                      <input id="perm_blockNotApplicable" type="checkbox" class="form-checkbox" />
+                      <span class="ml-2">Not Applicable</span>
+                    </label>
+                  </div>
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700">House No.</label>
+                  <input id="perm_houseNumber" type="text" name="perm_houseNumber" class="mt-1" />
+                  <div class="mt-2">
+                    <label class="inline-flex items-center text-sm">
+                      <input id="perm_houseNotApplicable" type="checkbox" class="form-checkbox" />
+                      <span class="ml-2">Not Applicable</span>
+                    </label>
+                  </div>
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700">Street address, etc. <span class="text-red-500">*</span></label>
+                  <input id="perm_street" type="text" name="perm_street" class="mt-1" />
+                </div>
+              </div>
+
+              <!-- Additional Address Fields for Permanent Address -->
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700">Unit No./Building Name</label>
+                  <input id="perm_unitBuilding" type="text" name="perm_unitBuilding" class="mt-1" />
+                  <div class="mt-2">
+                    <label class="inline-flex items-center text-sm">
+                      <input id="perm_unitNotApplicable" type="checkbox" class="form-checkbox" />
+                      <span class="ml-2">Not Applicable</span>
+                    </label>
+                  </div>
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700">Subdivision/Village</label>
+                  <input id="perm_subdivision" type="text" name="perm_subdivision" class="mt-1" />
+                  <div class="mt-2">
+                    <label class="inline-flex items-center text-sm">
+                      <input id="perm_subdivisionNotApplicable" type="checkbox" class="form-checkbox" />
+                      <span class="ml-2">Not Applicable</span>
+                    </label>
+                  </div>
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700">ZIP Code</label>
+                  <input id="perm_zip" type="text" name="perm_zip" class="mt-1" placeholder="XXXX" />
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="pb-8 border-b border-gray-200">
+          <h2 class="text-2xl font-bold text-gray-900 mb-6">Contact Information</h2>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Mobile Number</label>
+              <input id="mobile" type="tel" name="mobile" class="mt-1" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Telephone (optional)</label>
+              <input id="telephone" type="tel" name="telephone" class="mt-1" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Email Address</label>
+              <input id="email" type="email" name="email" class="mt-1" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Family Background -->
+        <div class="pb-8 border-b border-gray-200">
+          <h2 class="text-2xl font-bold text-gray-900 mb-6">Family Background</h2>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Father's First Name</label>
+              <input id="father_first" type="text" name="father_first" class="mt-1" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Father's Middle Name</label>
+              <input id="father_middle" type="text" name="father_middle" class="mt-1" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Father's Last Name</label>
+              <input id="father_last" type="text" name="father_last" class="mt-1" />
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Father's Occupation</label>
+              <input id="father_occ" type="text" name="father_occ" class="mt-1" />
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Mother's First Name</label>
+              <input id="mother_first" type="text" name="mother_first" class="mt-1" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Mother's Middle Name</label>
+              <input id="mother_middle" type="text" name="mother_middle" class="mt-1" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Mother's Last Name</label>
+              <input id="mother_last" type="text" name="mother_last" class="mt-1" />
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Mother's Occupation</label>
+              <input id="mother_occ" type="text" name="mother_occ" class="mt-1" />
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Spouse's First Name (optional)</label>
+              <input id="spouse_first" type="text" name="spouse_first" class="mt-1" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Spouse's Middle Name (optional)</label>
+              <input id="spouse_middle" type="text" name="spouse_middle" class="mt-1" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Spouse's Last Name (optional)</label>
+              <input id="spouse_last" type="text" name="spouse_last" class="mt-1" />
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Spouse's Occupation (optional)</label>
+              <input id="spouse_occ" type="text" name="spouse_occ" class="mt-1" />
+            </div>
+
+            <div class="md:col-span-3">
+              <label class="block text-sm font-medium text-gray-700">Children's Names & Ages</label>
+              <div id="childrenList" class="mt-2 space-y-2"></div>
+              <button id="addChildBtn" type="button" class="mt-2 inline-flex px-3 py-1 bg-gray-200 rounded">Add child</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Demographic Information -->
+        <div class="pb-8 border-b border-gray-200">
+          <h2 class="text-2xl font-bold text-gray-900 mb-6">Demographic Information</h2>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Birthplace</label>
+              <input id="birthplace" type="text" name="birthplace" class="mt-1" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Blood Type</label>
+              <select id="bloodType" name="bloodType" class="mt-1">
+                <option value="" selected> </option>
+                <option>A+</option>
+                <option>A-</option>
+                <option>B+</option>
+                <option>B-</option>
+                <option>O+</option>
+                <option>O-</option>
+                <option>AB+</option>
+                <option>AB-</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Height (cm)</label>
+              <input id="height" type="number" name="height" class="mt-1" />
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Weight (kg)</label>
+              <input id="weight" type="number" name="weight" class="mt-1" />
+            </div>
+            <div class="md:col-span-2">
+              <label class="block text-sm font-medium text-gray-700">Distinguishing Marks (optional)</label>
+              <input id="marks" type="text" name="marks" class="mt-1" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Employment / Source of Income -->
+        <div class="pb-8 border-b border-gray-200">
+          <h2 class="text-2xl font-bold text-gray-900 mb-6">Employment / Source of Income</h2>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Current Employer / Business Name</label>
+              <input id="employer" type="text" name="employer" class="mt-1" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Employer Address</label>
+              <input id="employer_address" type="text" name="employer_address" class="mt-1" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Occupation</label>
+              <input id="occupation" type="text" name="occupation" class="mt-1" />
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Employment Status</label>
+              <select id="employment_status" name="employment_status" class="mt-1">
+                <option value="" selected> </option>
+                <option>Regular</option>
+                <option>Contractual</option>
+                <option>Self-employed</option>
+                <option>Unemployed</option>
+                <option>Retired</option>
+                <option>Student</option>
+              </select>
+            </div>
+
+            <div class="md:col-span-2">
+              <label class="block text-sm font-medium text-gray-700">Monthly Income Bracket</label>
+              <select id="income_bracket" name="income_bracket" class="mt-1">
+                <option value="" selected> </option>
+                <option>&lt;10k</option>
+                <option>10–20k</option>
+                <option>20–50k</option>
+                <option>50k+</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Emergency Contact -->
+        <div class="pb-8 border-b border-gray-200">
+          <h2 class="text-2xl font-bold text-gray-900 mb-6">Emergency Contact</h2>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div>
+              <label class="block text-sm font-medium text-gray-700">First Name</label>
+              <input id="emg_first" type="text" name="emg_first" class="mt-1" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Middle Name</label>
+              <input id="emg_middle" type="text" name="emg_middle" class="mt-1" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Last Name</label>
+              <input id="emg_last" type="text" name="emg_last" class="mt-1" />
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Relationship</label>
+              <input id="emg_relation" type="text" name="emg_relation" class="mt-1" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Mobile Number</label>
+              <input id="emg_mobile" type="tel" name="emg_mobile" class="mt-1" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Address</label>
+              <input id="emg_address" type="text" name="emg_address" class="mt-1" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Supporting Documents -->
+        <div class="pb-8 border-b border-gray-200">
+          <h2 class="text-2xl font-bold text-gray-900 mb-6">Supporting Documents</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Government-issued ID</label>
+              <div id="govIdDrop" class="drop-area relative mt-1">
+                <input id="govIdInput" type="file" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" />
+                <div class="drop-inner pointer-events-none text-center">
+                  <p class="mt-2 text-sm text-gray-600">Drop gov ID or click to choose</p>
+                </div>
+              </div>
+              <div id="govIdPreview" class="mt-2"></div>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Proof of Billing</label>
+              <div id="billingDrop" class="drop-area relative mt-1">
+                <input id="billingInput" type="file" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" />
+                <div class="drop-inner pointer-events-none text-center">
+                  <p class="mt-2 text-sm text-gray-600">Drop proof of billing or click to choose</p>
+                </div>
+              </div>
+              <div id="billingPreview" class="mt-2"></div>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Signature (upload scanned)</label>
+              <div id="signatureDrop" class="drop-area relative mt-1">
+                <input id="signatureInput" type="file" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" />
+                <div class="drop-inner pointer-events-none text-center">
+                  <p class="mt-2 text-sm text-gray-600">Drop signature file or click to choose</p>
+                </div>
+              </div>
+              <div id="signaturePreview" class="mt-2"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Consent & Declaration -->
+        <div class="pb-8">
+          <h2 class="text-2xl font-bold text-gray-900 mb-6">Consent & Declaration</h2>
+          <div class="space-y-4">
+            <div class="flex items-center space-x-3">
+              <input id="certify" type="checkbox" name="certify" class="form-checkbox flex-shrink-0" />
+              <span class="text-sm text-gray-700 text-justify leading-relaxed">I hereby declare that all the information I have provided is true, complete, and correct to the best of my knowledge. I understand that any false or misleading information may result in the rejection or cancellation of my application. I also give my consent for the collection and processing of my personal data solely for its intended purpose.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between">
+          <button id="submitBtn" type="submit" class="inline-flex items-center px-4 py-2 bg-gray-400 text-white rounded-md cursor-not-allowed" disabled>Submit Application</button>
+          <span id="status" class="text-sm text-gray-600"></span>
+        </div>
+
+      </form>
+    </section>
+
+  </main>
+
+  <!-- Confirmation Modal -->
+  <div id="confirmationModal" class="modal-overlay">
+    <div class="modal-content">
+      <div class="p-6">
+        <div class="flex items-center justify-center w-12 h-12 mx-auto mb-4 bg-yellow-100 rounded-full">
+          <svg class="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+          </svg>
+        </div>
+        <div class="text-center">
+          <h3 class="text-lg font-semibold text-gray-900 mb-2">Confirm Submission</h3>
+          <p class="text-sm text-gray-600 mb-6">Are you sure you want to submit the application? Please review all information before proceeding.</p>
+          <div class="flex space-x-3 justify-center">
+            <button id="confirmNo" type="button" class="px-4 py-2 text-gray-700 bg-gray-100 border border-gray-300 rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors">
+              No, Cancel
+            </button>
+            <button id="confirmYes" type="button" class="px-4 py-2 text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors">
+              Yes, Submit
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="scripts.js"></script>
+
+  <!-- Fallback script for PyCharm compatibility -->
+  <script>
+    // Fallback attestation checkbox functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const certifyCheckbox = document.getElementById('certify');
+      const submitBtn = document.getElementById('submitBtn');
+
+      console.log('Fallback script loaded');
+      console.log('certifyCheckbox found:', !!certifyCheckbox);
+      console.log('submitBtn found:', !!submitBtn);
+
+      if (certifyCheckbox && submitBtn) {
+        certifyCheckbox.addEventListener('change', function(e) {
+          console.log('Fallback: Checkbox changed, checked:', e.target.checked);
+          if (e.target.checked) {
+            submitBtn.disabled = false;
+            submitBtn.className = 'inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 cursor-pointer';
+            console.log('Fallback: Button enabled');
+          } else {
+            submitBtn.disabled = true;
+            submitBtn.className = 'inline-flex items-center px-4 py-2 bg-gray-400 text-white rounded-md cursor-not-allowed';
+            console.log('Fallback: Button disabled');
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>

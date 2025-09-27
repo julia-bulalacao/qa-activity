@@ -6,9 +6,31 @@
   <title>Create Application Form - Automation Challenge</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="navigation.css">
 </head>
-<body class="bg-gray-50 p-3 min-h-screen flex items-center justify-center">
-  <main class="w-full max-w-4xl px-6">
+<body class="bg-gray-50 min-h-screen">
+  <div class="p-3 min-h-screen flex items-center justify-center">
+    <main class="w-full max-w-4xl px-6">
+    <!-- Progress Indicator -->
+    <div class="mb-8">
+      <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-100">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-sm font-medium text-gray-700">Automation Challenge Progress</span>
+          <span class="text-sm text-gray-500">Step 2 of 5</span>
+        </div>
+        <div class="w-full bg-gray-200 rounded-full h-2">
+          <div class="bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full transition-all duration-500" style="width: 40%"></div>
+        </div>
+        <div class="flex justify-between mt-3 text-xs text-gray-500">
+          <span>Welcome</span>
+          <span class="text-blue-600 font-medium">Setup</span>
+          <span>Form</span>
+          <span>Review</span>
+          <span>Complete</span>
+        </div>
+      </div>
+    </div>
+
     <div class="bg-white shadow-xl rounded-3xl p-16 text-center border border-gray-200 backdrop-blur-sm">
 
       <!-- Form GIF -->
@@ -26,7 +48,7 @@
       </div>
 
       <!-- Page Title -->
-      <div class="mb-12">
+      <div class="mb-8">
         <h1 class="text-5xl font-bold text-gray-900 mb-4">
           <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-blue-600">Ready to Begin!</span>
         </h1>
@@ -35,6 +57,7 @@
         </p>
       </div>
 
+      <!-- Timer Display -->
       <!-- Instructions -->
       <div class="bg-gradient-to-br from-slate-50 to-gray-50 border border-gray-200 rounded-2xl p-8 mb-12 shadow-sm text-left">
         <div class="flex items-center mb-6 flex items-center justify-center">
@@ -110,8 +133,60 @@
 
     </div>
   </main>
+  </div>
+
+  <!-- Footer -->
+  <footer class="text-center text-gray-500 text-sm py-4">
+    Made with 💗 by Lia
+  </footer>
 
   <script src="scripts.js"></script>
+  <script src="navigation.js"></script>
+  <script>
+    let timerInterval;
+
+    function updateTimer() {
+      const startTime = localStorage.getItem('automationStartTime');
+      if (startTime) {
+        const currentTime = Date.now();
+        const elapsedTime = currentTime - parseInt(startTime);
+        const minutes = Math.floor(elapsedTime / 60000);
+        const seconds = Math.floor((elapsedTime % 60000) / 1000);
+
+        const timerElement = document.getElementById('timer');
+        if (timerElement) {
+          timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+      } else {
+        // If no start time exists, start the timer now (in case user navigated directly to this page)
+        localStorage.setItem('automationStartTime', Date.now().toString());
+      }
+    }
+
+    // Start the timer when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      updateTimer();
+      timerInterval = setInterval(updateTimer, 1000);
+    });
+
+    // Clear timer when navigating away (optional - keeps it running across tabs)
+    window.addEventListener('beforeunload', function() {
+      if (timerInterval) {
+        clearInterval(timerInterval);
+      }
+    });
+  </script>
+
+  <!-- Timer Display - Bottom Right -->
+  <div class="fixed bottom-4 right-4 bg-white border border-gray-300 rounded-lg p-3 shadow-lg">
+    <div class="flex items-center space-x-2">
+      <svg class="w-4 h-4 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+      </svg>
+      <span class="text-xs font-medium text-gray-700">Time:</span>
+      <span id="timer" class="text-sm font-bold text-blue-600">00:00</span>
+    </div>
+  </div>
 
 </body>
 </html>

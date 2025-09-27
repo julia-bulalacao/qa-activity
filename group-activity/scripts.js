@@ -352,6 +352,58 @@ function setupDropArea(dropEl, inputEl, previewEl, label) {
   });
 }
 
+function setupNotApplicableCheckboxes() {
+  // Define the field-checkbox mappings
+  const notApplicableFields = [
+    { checkbox: 'lotNotApplicable', field: 'curr_lot' },
+    { checkbox: 'blockNotApplicable', field: 'curr_house' },
+    { checkbox: 'houseNotApplicable', field: 'houseNumber' },
+    { checkbox: 'unitNotApplicable', field: 'unitBuilding' },
+    { checkbox: 'subdivisionNotApplicable', field: 'subdivision' },
+    { checkbox: 'perm_lotNotApplicable', field: 'perm_lot' },
+    { checkbox: 'perm_blockNotApplicable', field: 'perm_house' },
+    { checkbox: 'perm_houseNotApplicable', field: 'perm_houseNumber' },
+    { checkbox: 'perm_unitNotApplicable', field: 'perm_unitBuilding' },
+    { checkbox: 'perm_subdivisionNotApplicable', field: 'perm_subdivision' }
+  ];
+
+  notApplicableFields.forEach(({ checkbox, field }) => {
+    const checkboxEl = document.getElementById(checkbox);
+    const fieldEl = document.getElementById(field) || document.querySelector(`[name="${field}"]`);
+
+    if (checkboxEl && fieldEl) {
+      checkboxEl.addEventListener('change', function() {
+        if (this.checked) {
+          // Disable the field and clear its value
+          fieldEl.disabled = true;
+          fieldEl.value = '';
+          fieldEl.style.backgroundColor = '#f3f4f6';
+          fieldEl.style.color = '#9ca3af';
+          fieldEl.style.cursor = 'not-allowed';
+
+          // Remove required attribute if present
+          if (fieldEl.hasAttribute('required')) {
+            fieldEl.setAttribute('data-was-required', 'true');
+            fieldEl.removeAttribute('required');
+          }
+        } else {
+          // Enable the field
+          fieldEl.disabled = false;
+          fieldEl.style.backgroundColor = '#ffffff';
+          fieldEl.style.color = '#111827';
+          fieldEl.style.cursor = '';
+
+          // Restore required attribute if it was there before
+          if (fieldEl.getAttribute('data-was-required') === 'true') {
+            fieldEl.setAttribute('required', '');
+            fieldEl.removeAttribute('data-was-required');
+          }
+        }
+      });
+    }
+  });
+}
+
 function initializePageAnimation() {
   const elements = document.querySelectorAll('main > div > *');
   elements.forEach((el, index) => {
@@ -432,6 +484,9 @@ function setupFormEventListeners() {
       childrenList.appendChild(createChildRow());
     });
   }
+
+  // Setup "Not Applicable" checkboxes functionality
+  setupNotApplicableCheckboxes();
 
   if (sameAsCheckbox) {
     sameAsCheckbox.addEventListener('change', (e) => {

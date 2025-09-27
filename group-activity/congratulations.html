@@ -6,9 +6,31 @@
   <title>Congratulations! - Automation Challenge Complete</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="navigation.css">
 </head>
-<body class="bg-gradient-to-br from-blue-50 via-white to-green-50 min-h-screen flex items-center justify-center">
-  <main class="w-full max-w-3xl px-6">
+<body class="bg-gradient-to-br from-blue-50 via-white to-green-50 min-h-screen">
+  <div class="flex items-center justify-center min-h-screen">
+    <main class="w-full max-w-3xl px-6">
+    <!-- Progress Indicator -->
+    <div class="mb-8">
+      <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-100">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-sm font-medium text-gray-700">Automation Challenge Progress</span>
+          <span class="text-sm text-green-600 font-semibold">Step 5 of 5 - Complete!</span>
+        </div>
+        <div class="w-full bg-gray-200 rounded-full h-2">
+          <div class="bg-gradient-to-r from-green-500 to-blue-500 h-2 rounded-full transition-all duration-500" style="width: 100%"></div>
+        </div>
+        <div class="flex justify-between mt-3 text-xs text-gray-500">
+          <span>Welcome</span>
+          <span>Setup</span>
+          <span>Form</span>
+          <span>Review</span>
+          <span class="text-green-600 font-medium">Complete</span>
+        </div>
+      </div>
+    </div>
+
     <div class="bg-white shadow-2xl rounded-2xl p-12 text-center border border-gray-100">
 
       <!-- Congratulations GIF -->
@@ -25,9 +47,14 @@
 
       <div class="bg-gradient-to-r from-blue-500 to-green-500 text-white rounded-xl p-8 mb-8 shadow-lg">
         <h2 class="text-2xl font-bold mb-4">Mission Accomplished!</h2>
-        <p class="text-xl">
+        <p class="text-xl mb-4">
           You have successfully finished the automation challenge!
         </p>
+        <div class="bg-white bg-opacity-20 rounded-lg p-4">
+          <p class="text-lg font-semibold">
+            🎉 Congratulations on finishing the Automation task in <span id="finalTime" class="font-bold text-yellow-300">--:--</span> minutes! 🎉
+          </p>
+        </div>
       </div>
 
       <!-- Achievement Details -->
@@ -58,8 +85,54 @@
 
     </div>
   </main>
+  </div>
+
+  <!-- Footer -->
+  <footer class="text-center text-gray-500 text-sm py-4">
+    Made with 💗 by Lia
+  </footer>
 
   <script src="scripts.js"></script>
+  <script src="navigation.js"></script>
+  <script>
+    // Calculate and display final completion time
+    document.addEventListener('DOMContentLoaded', function() {
+      const startTime = localStorage.getItem('automationStartTime');
+      const completionTime = localStorage.getItem('automationCompletionTime');
+
+      let finalTime = null;
+
+      if (startTime && !completionTime) {
+        // First time reaching congratulations page - calculate and store completion time
+        const endTime = Date.now();
+        const totalTime = endTime - parseInt(startTime);
+
+        // Store the completion time for future refreshes
+        localStorage.setItem('automationCompletionTime', totalTime.toString());
+        finalTime = totalTime;
+
+        // Clear the start time after a delay to allow for refreshes
+        setTimeout(() => {
+          localStorage.removeItem('automationStartTime');
+        }, 300000); // Keep for 5 minutes to handle refreshes
+
+      } else if (completionTime) {
+        // Page was refreshed - use stored completion time
+        finalTime = parseInt(completionTime);
+      }
+
+      if (finalTime) {
+        const minutes = Math.floor(finalTime / 60000);
+        const seconds = Math.floor((finalTime % 60000) / 1000);
+
+        const finalTimeElement = document.getElementById('finalTime');
+        if (finalTimeElement) {
+          const timeString = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+          finalTimeElement.textContent = timeString;
+        }
+      }
+    });
+  </script>
 
 </body>
 </html>

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Submitted - Thank You</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .success-container {
+            max-width: 600px;
+            background: white;
+            padding: 50px 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+            border: 1px solid #e9ecef;
+            animation: slideIn 0.6s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .checkmark {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #28a745;
+            margin: 0 auto 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: scaleIn 0.5s ease-out 0.2s both;
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0);
+            }
+            to {
+                transform: scale(1);
+            }
+        }
+
+        .checkmark::after {
+            content: '✓';
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 2.2em;
+            font-weight: 400;
+        }
+
+        .message {
+            color: #666;
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .details {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 30px 0;
+            text-align: left;
+        }
+
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding: 8px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .detail-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: #555;
+        }
+
+        .detail-value {
+            color: #333;
+        }
+
+        .actions {
+            margin-top: 40px;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin: 0 10px;
+            transition: background-color 0.3s;
+        }
+
+        .btn-primary {
+            background: #007bff;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #0056b3;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #545b62;
+        }
+
+        .reference-number {
+            background: #e3f2fd;
+            color: #1976d2;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-family: monospace;
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+
+        .info-text {
+            margin-top: 30px;
+            color: #888;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="success-container">
+        <div class="checkmark"></div>
+
+        <h1>Thank You!</h1>
+        <p class="message">Your application has been successfully submitted. We have received all your information and will review it shortly.</p>
+
+        <div class="reference-number">
+            Reference Number: <span id="referenceNumber">APP-2025-001234</span>
+        </div>
+
+        <div class="details">
+            <div class="detail-item">
+                <span class="detail-label">Submission Date:</span>
+                <span class="detail-value" id="submissionDate"></span>
+            </div>
+            <div class="detail-item">
+                <span class="detail-label">Status:</span>
+                <span class="detail-value">Under Review</span>
+            </div>
+            <div class="detail-item">
+                <span class="detail-label">Expected Response:</span>
+                <span class="detail-value">Within 3-5 business days</span>
+            </div>
+        </div>
+
+        <div class="actions">
+            <a href="front-page.html" class="btn btn-primary" id="newApplicationBtn">Submit New Application</a>
+            <a href="#" class="btn btn-secondary" id="printBtn">Print Confirmation</a>
+        </div>
+
+        <p class="info-text">
+            You will receive a confirmation email shortly. Please save your reference number for future correspondence.
+        </p>
+    </div>
+
+    <script>
+        // Set current date and time
+        document.getElementById('submissionDate').textContent = new Date().toLocaleString();
+
+        // Generate random reference number
+        const randomId = Math.floor(Math.random() * 900000) + 100000;
+        document.getElementById('referenceNumber').textContent = `APP-2025-${randomId}`;
+
+        // Print functionality
+        document.getElementById('printBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.print();
+        });
+
+        // Smooth transition for new application button
+        document.getElementById('newApplicationBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+
+            this.style.transform = 'scale(0.95)';
+
+            setTimeout(() => {
+                window.location.href = 'front-page.html';
+            }, 200);
+        });
+    </script>
+</body>
+</html>

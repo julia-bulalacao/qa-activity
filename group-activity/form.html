@@ -6,13 +6,73 @@
   <title>Form Playground - Tailwind</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="navigation.css">
 </head>
-<body class="bg-white min-h-screen flex items-start justify-center py-8">
-  <main class="w-full max-w-5xl px-6">
-    <header class="mb-10 text-center">
+<body class="bg-white min-h-screen">
+  <div class="flex items-start justify-center py-8 min-h-screen">
+    <main class="w-full max-w-5xl px-6">
+    <!-- Progress Indicator -->
+    <div class="mb-8">
+      <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-100">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-sm font-medium text-gray-700">Automation Challenge Progress</span>
+          <span class="text-sm text-gray-500">Step 3 of 5</span>
+        </div>
+        <div class="w-full bg-gray-200 rounded-full h-2">
+          <div class="bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full transition-all duration-500" style="width: 60%"></div>
+        </div>
+        <div class="flex justify-between mt-3 text-xs text-gray-500">
+          <span>Welcome</span>
+          <span>Setup</span>
+          <span class="text-blue-600 font-medium">Form</span>
+          <span>Review</span>
+          <span>Complete</span>
+        </div>
+      </div>
+    </div>
+
+    <header class="mb-8 text-center">
       <h1 id="form-title" class="text-4xl font-bold text-gray-900 mb-3">
         <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Form Playground</span>
-      </h1>
+      </  <script src="scripts.js"></script>
+  <script src="navigation.js"></script>
+
+  <script>
+    let timerInterval;
+
+    function updateTimer() {
+      const startTime = localStorage.getItem('automationStartTime');
+      if (startTime) {
+        const currentTime = Date.now();
+        const elapsedTime = currentTime - parseInt(startTime);
+        const minutes = Math.floor(elapsedTime / 60000);
+        const seconds = Math.floor((elapsedTime % 60000) / 1000);
+
+        const timerElement = document.getElementById('timer');
+        if (timerElement) {
+          timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+      } else {
+        // If no start time exists, start the timer now (in case user navigated directly to this page)
+        localStorage.setItem('automationStartTime', Date.now().toString());
+      }
+    }
+
+    // Start the timer when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      updateTimer();
+      timerInterval = setInterval(updateTimer, 1000);
+    });
+
+    // Clear timer when navigating away (optional - keeps it running across tabs)
+    window.addEventListener('beforeunload', function() {
+      if (timerInterval) {
+        clearInterval(timerInterval);
+      }
+    });
+  </script>
+
+  <!-- Fallback JavaScript for PyCharm compatibility -->
       <p class="text-lg text-gray-600 max-w-2xl mx-auto">
         Complete this comprehensive application form featuring various input types, file uploads, and dynamic form elements.
       </p>
@@ -138,11 +198,11 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label class="block text-sm font-medium text-gray-700">Phone No. (+63)</label>
-                <input id="mobileNum" type="tel" name="mobile" class="mt-1" placeholder="9XX-XXX-XXXX" required />
+                <input id="mobile" type="tel" name="mobile" class="mt-1" placeholder="9XX-XXX-XXXX" required />
               </div>
               <div>
                 <label class="block text-sm font-medium text-gray-700">Email Address </label>
-                <input id="emailAdd" type="email" name="email" class="mt-1" required />
+                <input id="email" type="email" name="email" class="mt-1" required />
               </div>
             </div>
 
@@ -600,6 +660,12 @@
     </section>
 
   </main>
+  </div>
+
+  <!-- Footer -->
+  <footer class="text-center text-gray-500 text-sm py-4">
+    Made with 💗 by Lia
+  </footer>
 
   <!-- Confirmation Modal -->
   <div id="confirmationModal" class="modal-overlay">
@@ -655,5 +721,17 @@
       }
     });
   </script>
+
+  <!-- Timer Display - Bottom Right -->
+  <div class="fixed bottom-4 right-4 bg-white border border-gray-300 rounded-lg p-3 shadow-lg">
+    <div class="flex items-center space-x-2">
+      <svg class="w-4 h-4 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+      </svg>
+      <span class="text-xs font-medium text-gray-700">Time:</span>
+      <span id="timer" class="text-sm font-bold text-blue-600">00:00</span>
+    </div>
+  </div>
+
 </body>
 </html>

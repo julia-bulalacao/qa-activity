@@ -1,0 +1,259 @@
+/* Navigation Components Styles */
+
+/* Breadcrumb Navigation */
+.nav-breadcrumb {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  right: 16px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-breadcrumb nav {
+  display: flex;
+  align-items: center;
+  font-size: 0.875rem;
+  color: #6b7280;
+  background: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  border: 1px solid #e5e7eb;
+  max-width: 64rem;
+  width: 100%;
+}
+
+.nav-breadcrumb a {
+  display: flex;
+  align-items: center;
+  color: #2563eb;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.nav-breadcrumb a:hover {
+  color: #1d4ed8;
+}
+
+.nav-breadcrumb .current {
+  font-weight: 600;
+  color: #2563eb;
+}
+
+.nav-breadcrumb .complete {
+  color: #059669;
+}
+
+.nav-breadcrumb .separator {
+  width: 1rem;
+  height: 1rem;
+  color: #9ca3af;
+  margin: 0 0.5rem;
+}
+
+.nav-breadcrumb .step-indicator {
+  margin-left: auto;
+  font-size: 0.75rem;
+  color: #6b7280;
+  background: #eff6ff;
+  padding: 0.25rem 0.5rem;
+  border-radius: 9999px;
+}
+
+.nav-breadcrumb .step-indicator.complete {
+  color: #059669;
+  background: #ecfdf5;
+  font-weight: 600;
+}
+
+/* Progress Bar */
+.progress-container {
+  margin-bottom: 2rem;
+}
+
+.progress-wrapper {
+  background: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  border: 1px solid #e5e7eb;
+}
+
+.progress-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.progress-title {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
+}
+
+.progress-step {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.progress-bar {
+  width: 100%;
+  background: #e5e7eb;
+  border-radius: 9999px;
+  height: 0.5rem;
+  overflow: hidden;
+}
+
+.progress-fill {
+  background: linear-gradient(to right, #3b82f6, #8b5cf6);
+  height: 0.5rem;
+  border-radius: 9999px;
+  transition: width 0.5s ease;
+}
+
+.progress-fill.complete {
+  background: linear-gradient(to right, #10b981, #3b82f6);
+}
+
+.progress-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.75rem;
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+.progress-labels .active {
+  color: #2563eb;
+  font-weight: 500;
+}
+
+.progress-labels .complete {
+  color: #059669;
+  font-weight: 500;
+}
+
+/* Back Button */
+.back-button {
+  position: fixed;
+  top: 80px;
+  left: 16px;
+  z-index: 999;
+}
+
+.back-button button {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  color: #6b7280;
+  background: white;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.back-button button:hover {
+  background: #f9fafb;
+  color: #374151;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.back-button button:active {
+  transform: translateY(0);
+}
+
+.back-button svg {
+  width: 1rem;
+  height: 1rem;
+  margin-right: 0.5rem;
+}
+
+/* Content Spacing */
+.main-content {
+  margin-top: 140px;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .nav-breadcrumb {
+    left: 8px;
+    right: 8px;
+  }
+
+  .nav-breadcrumb nav {
+    padding: 0.75rem;
+    font-size: 0.75rem;
+  }
+
+  .back-button {
+    left: 8px;
+    top: 75px;
+  }
+
+  .back-button button {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.75rem;
+  }
+
+  .main-content {
+    margin-top: 120px;
+  }
+
+  .progress-labels {
+    display: none;
+  }
+}
+
+/* Animation for progress bar */
+@keyframes progressFill {
+  from {
+    width: 0%;
+  }
+  to {
+    width: var(--progress-width);
+  }
+}
+
+.progress-fill.animated {
+  animation: progressFill 1s ease-out;
+}
+
+/* Hover effects for interactive elements */
+.nav-breadcrumb a:hover svg {
+  transform: scale(1.1);
+}
+
+.back-button button:hover svg {
+  transform: translateX(-2px);
+}
+
+/* Focus styles for accessibility */
+.nav-breadcrumb a:focus,
+.back-button button:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* Loading state for progress bar */
+.progress-fill.loading {
+  background: linear-gradient(90deg, #e5e7eb 25%, #d1d5db 50%, #e5e7eb 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}

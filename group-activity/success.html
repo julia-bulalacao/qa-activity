@@ -10,7 +10,7 @@
 </head>
 <body class="bg-white min-h-screen">
   <div class="flex items-center justify-center min-h-screen">
-    <main class="w-full max-w-4xl px-6">
+    <main class="w-full p-4 max-w-4xl px-6">
     <!-- Progress Indicator -->
     <div class="mb-8">
       <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-100">
@@ -87,14 +87,14 @@
 
       <!-- Action Buttons -->
       <div class="flex flex-col sm:flex-row gap-6 justify-center mb-8">
-        <button id="submitAnotherBtn" onclick="window.location.href='index.html'" class="group px-10 py-4 bg-white border-2 border-blue-200 text-blue-600 text-lg font-semibold rounded-xl hover:bg-blue-50 hover:border-blue-300 transition-all duration-200 shadow-lg hover:shadow-xl focus:ring-4 focus:ring-blue-200">
-          <span class="flex items-center justify-center">
-            <svg class="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd"></path>
-            </svg>
-            Submit Another Application
-          </span>
-        </button>
+<!--        <button id="submitAnotherBtn" onclick="window.location.href='index.html'" class="group px-10 py-4 bg-white border-2 border-blue-200 text-blue-600 text-lg font-semibold rounded-xl hover:bg-blue-50 hover:border-blue-300 transition-all duration-200 shadow-lg hover:shadow-xl focus:ring-4 focus:ring-blue-200">-->
+<!--          <span class="flex items-center justify-center">-->
+<!--            <svg class="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform" fill="currentColor" viewBox="0 0 20 20">-->
+<!--              <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd"></path>-->
+<!--            </svg>-->
+<!--            Submit Another Application-->
+<!--          </span>-->
+<!--        </button>-->
         <button id="nextPageBtn" onclick="nextPage()" class="group relative px-10 py-4 bg-green-600 text-white text-lg font-semibold rounded-xl hover:bg-green-700 transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl focus:ring-4 focus:ring-green-200">
           <span class="flex items-center justify-center">
             <svg class="w-5 h-5 mr-2 group-hover:translate-x-1 transition-transform" fill="currentColor" viewBox="0 0 20 20">
@@ -106,11 +106,11 @@
       </div>
 
       <!-- Print Option -->
-      <div class="border-t pt-6">
-        <button id="printConfirmationBtn" onclick="window.print()" class="text-gray-500 hover:text-gray-700 underline font-medium transition-colors">
-          Print Confirmation
-        </button>
-      </div>
+<!--      <div class="border-t pt-6">-->
+<!--        <button id="printConfirmationBtn" onclick="window.print()" class="text-gray-500 hover:text-gray-700 underline font-medium transition-colors">-->
+<!--          Print Confirmation-->
+<!--        </button>-->
+<!--      </div>-->
 
     </div>
   </main>
@@ -131,12 +131,13 @@
       if (startTime) {
         const currentTime = Date.now();
         const elapsedTime = currentTime - parseInt(startTime);
-        const minutes = Math.floor(elapsedTime / 60000);
+        const hours = Math.floor(elapsedTime / 3600000);
+        const minutes = Math.floor((elapsedTime % 3600000) / 60000);
         const seconds = Math.floor((elapsedTime % 60000) / 1000);
 
         const timerElement = document.getElementById('timer');
         if (timerElement) {
-          timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+          timerElement.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
         }
       } else {
         // If no start time exists, start the timer now (in case user navigated directly to this page)
@@ -165,7 +166,7 @@
         <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
       </svg>
       <span class="text-xs font-medium text-gray-700">Time:</span>
-      <span id="timer" class="text-sm font-bold text-blue-600">00:00</span>
+      <span id="timer" class="text-sm font-bold text-blue-600">00:00:00</span>
     </div>
   </div>
 

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Form Playground - Tailwind</title>
+  <title>Form Playground</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="navigation.css">
@@ -32,9 +32,9 @@
     </div>
 
     <header class="mb-8 text-center">
-      <h1 id="form-title" class="text-4xl font-bold text-gray-900 mb-3">
-        <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Form Playground</span>
-      </  <script src="scripts.js"></script>
+<!--      <h1 id="form-title" class="text-4xl font-bold text-gray-900 mb-3">-->
+<!--        <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Form Playground</span>-->
+       <script src="scripts.js"></script>
   <script src="navigation.js"></script>
 
   <script>
@@ -45,12 +45,13 @@
       if (startTime) {
         const currentTime = Date.now();
         const elapsedTime = currentTime - parseInt(startTime);
-        const minutes = Math.floor(elapsedTime / 60000);
+        const hours = Math.floor(elapsedTime / 3600000);
+        const minutes = Math.floor((elapsedTime % 3600000) / 60000);
         const seconds = Math.floor((elapsedTime % 60000) / 1000);
 
         const timerElement = document.getElementById('timer');
         if (timerElement) {
-          timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+          timerElement.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
         }
       } else {
         // If no start time exists, start the timer now (in case user navigated directly to this page)
@@ -73,9 +74,9 @@
   </script>
 
   <!-- Fallback JavaScript for PyCharm compatibility -->
-      <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-        Complete this comprehensive application form featuring various input types, file uploads, and dynamic form elements.
-      </p>
+<!--      <p class="text-lg text-gray-600 max-w-2xl mx-auto">-->
+<!--        Complete this comprehensive application form featuring various input types, file uploads, and dynamic form elements.-->
+<!--      </p>-->
     </header>
 
     <section class="bg-white shadow-lg border border-gray-100 rounded-2xl overflow-hidden" role="main" aria-labelledby="form-title">
@@ -198,11 +199,11 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label class="block text-sm font-medium text-gray-700">Phone No. (+63)</label>
-                <input id="mobile" type="tel" name="mobile" class="mt-1" placeholder="9XX-XXX-XXXX" required />
+                <input id="mobileNum" type="tel" name="mobile" class="mt-1" placeholder="9XX-XXX-XXXX" required />
               </div>
               <div>
                 <label class="block text-sm font-medium text-gray-700">Email Address </label>
-                <input id="email" type="email" name="email" class="mt-1" required />
+                <input id="emailAdd" type="email" name="email" class="mt-1" required />
               </div>
             </div>
 
@@ -308,7 +309,7 @@
               </div>
             </div>
 
-            <div class="pb-8 border-b border-gray-200">
+            <div class="pb-2 border-gray-200">
               <h2 class="text-xl font-bold text-gray-900 mb-6">Permanent Address</h2>
               <div class="flex items-center gap-3 mb-6">
                 <input id="sameAsCurrent" type="checkbox" />
@@ -651,10 +652,14 @@
           </div>
         </div>
 
-        <div class="flex items-center justify-between">
-          <button id="submitBtn" type="submit" class="inline-flex items-center px-4 py-2 bg-gray-400 text-white rounded-md cursor-not-allowed" disabled>Submit Application</button>
+        <div class="flex items-center justify-end space-x-2">
           <span id="status" class="text-sm text-gray-600"></span>
+          <button id="submitBtn" type="submit"
+            class="inline-flex items-center px-4 py-2 bg-gray-400 text-white rounded-md cursor-not-allowed" disabled>
+            Submit Application
+          </button>
         </div>
+
 
       </form>
     </section>
@@ -729,7 +734,7 @@
         <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
       </svg>
       <span class="text-xs font-medium text-gray-700">Time:</span>
-      <span id="timer" class="text-sm font-bold text-blue-600">00:00</span>
+      <span id="timer" class="text-sm font-bold text-blue-600">00:00:00</span>
     </div>
   </div>
 

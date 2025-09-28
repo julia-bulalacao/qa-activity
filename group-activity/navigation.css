@@ -1,6 +1,6 @@
-/* Navigation Components Styles */
 
-/* Breadcrumb Navigation */
+
+
 .nav-breadcrumb {
   position: fixed;
   top: 16px;
@@ -69,7 +69,7 @@
   font-weight: 600;
 }
 
-/* Progress Bar */
+
 .progress-container {
   margin-bottom: 2rem;
 }
@@ -137,7 +137,7 @@
   font-weight: 500;
 }
 
-/* Back Button */
+
 .back-button {
   position: fixed;
   top: 80px;
@@ -176,43 +176,43 @@
   margin-right: 0.5rem;
 }
 
-/* Content Spacing */
+
 .main-content {
   margin-top: 140px;
 }
 
-/* Mobile Responsiveness */
+
 @media (max-width: 768px) {
   .nav-breadcrumb {
     left: 8px;
     right: 8px;
   }
-
+  
   .nav-breadcrumb nav {
     padding: 0.75rem;
     font-size: 0.75rem;
   }
-
+  
   .back-button {
     left: 8px;
     top: 75px;
   }
-
+  
   .back-button button {
     padding: 0.5rem 0.75rem;
     font-size: 0.75rem;
   }
-
+  
   .main-content {
     margin-top: 120px;
   }
-
+  
   .progress-labels {
     display: none;
   }
 }
 
-/* Animation for progress bar */
+
 @keyframes progressFill {
   from {
     width: 0%;
@@ -226,7 +226,7 @@
   animation: progressFill 1s ease-out;
 }
 
-/* Hover effects for interactive elements */
+
 .nav-breadcrumb a:hover svg {
   transform: scale(1.1);
 }
@@ -235,14 +235,14 @@
   transform: translateX(-2px);
 }
 
-/* Focus styles for accessibility */
+
 .nav-breadcrumb a:focus,
 .back-button button:focus {
   outline: 2px solid #3b82f6;
   outline-offset: 2px;
 }
 
-/* Loading state for progress bar */
+
 .progress-fill.loading {
   background: linear-gradient(90deg, #e5e7eb 25%, #d1d5db 50%, #e5e7eb 75%);
   background-size: 200% 100%;

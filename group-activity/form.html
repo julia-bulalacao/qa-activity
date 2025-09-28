@@ -8,10 +8,10 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="navigation.css">
 </head>
-<body class="bg-white min-h-screen">
-  <div class="flex items-start justify-center py-8 min-h-screen">
-    <main class="w-full max-w-5xl px-6">
-    <!-- Progress Indicator -->
+<body class="bg-gray-50 min-h-screen">
+  <div class="flex justify-center">
+    <div class="max-w-5xl w-full px-6 py-8">
+      <main>
     <div class="mb-8">
       <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-100">
         <div class="flex items-center justify-between mb-3">
@@ -31,59 +31,20 @@
       </div>
     </div>
 
-    <header class="mb-8 text-center">
-<!--      <h1 id="form-title" class="text-4xl font-bold text-gray-900 mb-3">-->
-<!--        <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Form Playground</span>-->
-       <script src="scripts.js"></script>
-  <script src="navigation.js"></script>
-
-  <script>
-    let timerInterval;
-
-    function updateTimer() {
-      const startTime = localStorage.getItem('automationStartTime');
-      if (startTime) {
-        const currentTime = Date.now();
-        const elapsedTime = currentTime - parseInt(startTime);
-        const hours = Math.floor(elapsedTime / 3600000);
-        const minutes = Math.floor((elapsedTime % 3600000) / 60000);
-        const seconds = Math.floor((elapsedTime % 60000) / 1000);
-
-        const timerElement = document.getElementById('timer');
-        if (timerElement) {
-          timerElement.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-        }
-      } else {
-        // If no start time exists, start the timer now (in case user navigated directly to this page)
-        localStorage.setItem('automationStartTime', Date.now().toString());
-      }
-    }
-
-    // Start the timer when page loads
-    document.addEventListener('DOMContentLoaded', function() {
-      updateTimer();
-      timerInterval = setInterval(updateTimer, 1000);
-    });
-
-    // Clear timer when navigating away (optional - keeps it running across tabs)
-    window.addEventListener('beforeunload', function() {
-      if (timerInterval) {
-        clearInterval(timerInterval);
-      }
-    });
-  </script>
-
-  <!-- Fallback JavaScript for PyCharm compatibility -->
-<!--      <p class="text-lg text-gray-600 max-w-2xl mx-auto">-->
-<!--        Complete this comprehensive application form featuring various input types, file uploads, and dynamic form elements.-->
-<!--      </p>-->
-    </header>
+    <!-- <header class="mb-8 text-center">
+      <h1 id="form-title" class="text-4xl font-bold text-gray-900 mb-3">
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Form Playground</span>
+      </h1>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+        Complete this comprehensive application form featuring various input types, file uploads, and dynamic form elements.
+      </p>
+    </header> -->
 
     <section class="bg-white shadow-lg border border-gray-100 rounded-2xl overflow-hidden" role="main" aria-labelledby="form-title">
       <div class="p-8">
         <form id="applicationForm" class="space-y-8">
 
-        <!-- Application Details -->
+
         <div class="pb-8 border-b border-gray-200">
           <h2 class="text-2xl font-bold text-gray-900 mb-6">Application Details</h2>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -115,12 +76,12 @@
           </div>
         </div>
 
-        <!-- Personal Information & Address -->
+
         <div class="pb-8 border-b border-gray-200">
           <h2 class="text-2xl font-bold text-gray-900 mb-6">Personal Information & Address</h2>
           <div class="space-y-6">
 
-            <!-- Title/Prefix Selection -->
+
             <div>
               <div class="flex flex-wrap gap-6">
                 <label class="inline-flex items-center">
@@ -136,13 +97,13 @@
                   <span class="ml-2">Sps</span>
                 </label>
                 <label class="inline-flex items-center">
-                  <input id="title_others" type="radio" name="title" value="Sps." class="form-radio text-red-500" />
+                  <input id="title_others" type="radio" name="title" value="Prefer not to say" class="form-radio text-red-500" />
                   <span class="ml-2">Prefer not to say</span>
                 </label>
               </div>
             </div>
 
-            <!-- Names Row with Middle Name Checkbox -->
+
             <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
               <div>
                 <label class="block text-sm font-medium text-gray-700">First Name</label>
@@ -175,7 +136,7 @@
               </div>
             </div>
 
-            <!-- Additional Personal Information -->
+
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
                 <label class="block text-sm font-medium text-gray-700">Date of Birth</label>
@@ -195,21 +156,21 @@
               </div>
             </div>
 
-            <!-- Contact Information Row -->
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label class="block text-sm font-medium text-gray-700">Phone No. (+63)</label>
-                <input id="mobileNum" type="tel" name="mobile" class="mt-1" placeholder="9XX-XXX-XXXX" required />
+                <input id="mobile" type="tel" name="mobile" class="mt-1" placeholder="9XX-XXX-XXXX" required />
               </div>
               <div>
                 <label class="block text-sm font-medium text-gray-700">Email Address </label>
-                <input id="emailAdd" type="email" name="email" class="mt-1" required />
+                <input id="email" type="email" name="email" class="mt-1" required />
               </div>
             </div>
 
             <hr class="mt-5">
             <h2 class="text-xl font-bold text-gray-900 mb-6">Current Address</h2>
-            <!-- Address Type Selection -->
+
             <div>
               <div class="flex flex-wrap gap-6">
                 <label class="inline-flex items-center">
@@ -223,7 +184,7 @@
               </div>
             </div>
 
-            <!-- Regional Information -->
+
             <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
               <div>
                 <label class="block text-sm font-medium text-gray-700">Region</label>
@@ -243,7 +204,7 @@
               </div>
             </div>
 
-            <!-- Detailed Address Information -->
+
             <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
               <div>
                 <label class="block text-sm font-medium text-gray-700">Lot No.</label>
@@ -281,7 +242,7 @@
               </div>
             </div>
 
-            <!-- Additional Address Fields -->
+
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
                 <label class="block text-sm font-medium text-gray-700">Unit No./Building Name</label>
@@ -310,13 +271,13 @@
             </div>
 
             <div class="pb-2 border-gray-200">
-              <h2 class="text-xl font-bold text-gray-900 mb-6">Permanent Address</h2>
+              <h2 class="text-xl font-bold text-gray-900 mb-2">Permanent Address</h2>
               <div class="flex items-center gap-3 mb-6">
                 <input id="sameAsCurrent" type="checkbox" />
                 <label for="sameAsCurrent" class="text-sm">Same as Current Address</label>
               </div>
 
-              <!-- Regional Information for Permanent Address -->
+
               <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
                 <div>
                   <label class="block text-sm font-medium text-gray-700">Region</label>
@@ -336,7 +297,7 @@
                 </div>
               </div>
 
-              <!-- Detailed Address Information for Permanent Address -->
+
               <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
                 <div>
                   <label class="block text-sm font-medium text-gray-700">Lot No.</label>
@@ -374,7 +335,7 @@
                 </div>
               </div>
 
-              <!-- Additional Address Fields for Permanent Address -->
+
               <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div>
                   <label class="block text-sm font-medium text-gray-700">Unit No./Building Name</label>
@@ -406,26 +367,26 @@
           </div>
         </div>
 
-        <!-- Contact Information -->
+
         <div class="pb-8 border-b border-gray-200">
           <h2 class="text-2xl font-bold text-gray-900 mb-6">Contact Information</h2>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div>
               <label class="block text-sm font-medium text-gray-700">Mobile Number</label>
-              <input id="mobile" type="tel" name="mobile" class="mt-1" />
+              <input id="contact_mobile" type="tel" name="contact_mobile" class="mt-1" />
             </div>
             <div>
               <label class="block text-sm font-medium text-gray-700">Telephone (optional)</label>
-              <input id="telephone" type="tel" name="telephone" class="mt-1" />
+              <input id="contact_telephone" type="tel" name="contact_telephone" class="mt-1" />
             </div>
             <div>
               <label class="block text-sm font-medium text-gray-700">Email Address</label>
-              <input id="email" type="email" name="email" class="mt-1" />
+              <input id="contact_email" type="email" name="contact_email" class="mt-1" />
             </div>
           </div>
         </div>
 
-        <!-- Family Background -->
+
         <div class="pb-8 border-b border-gray-200">
           <h2 class="text-2xl font-bold text-gray-900 mb-6">Family Background</h2>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -491,7 +452,7 @@
           </div>
         </div>
 
-        <!-- Demographic Information -->
+
         <div class="pb-8 border-b border-gray-200">
           <h2 class="text-2xl font-bold text-gray-900 mb-6">Demographic Information</h2>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -529,7 +490,7 @@
           </div>
         </div>
 
-        <!-- Employment / Source of Income -->
+
         <div class="pb-8 border-b border-gray-200">
           <h2 class="text-2xl font-bold text-gray-900 mb-6">Employment / Source of Income</h2>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -572,7 +533,7 @@
           </div>
         </div>
 
-        <!-- Emergency Contact -->
+
         <div class="pb-8 border-b border-gray-200">
           <h2 class="text-2xl font-bold text-gray-900 mb-6">Emergency Contact</h2>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -604,7 +565,7 @@
           </div>
         </div>
 
-        <!-- Supporting Documents -->
+
         <div class="pb-8 border-b border-gray-200">
           <h2 class="text-2xl font-bold text-gray-900 mb-6">Supporting Documents</h2>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -641,7 +602,7 @@
           </div>
         </div>
 
-        <!-- Consent & Declaration -->
+
         <div class="pb-8">
           <h2 class="text-2xl font-bold text-gray-900 mb-6">Consent & Declaration</h2>
           <div class="space-y-4">
@@ -652,27 +613,35 @@
           </div>
         </div>
 
-        <div class="flex items-center justify-end space-x-2">
-          <span id="status" class="text-sm text-gray-600"></span>
-          <button id="submitBtn" type="submit"
-            class="inline-flex items-center px-4 py-2 bg-gray-400 text-white rounded-md cursor-not-allowed" disabled>
-            Submit Application
-          </button>
+        <div class="flex items-center justify-between">
+          <button id="submitBtn" type="submit" class="inline-flex items-center px-4 py-2 bg-gray-400 text-white rounded-md cursor-not-allowed" disabled>Submit Application</button>
+          <!-- <span id="status" class="text-sm text-gray-600"></span> -->
         </div>
-
 
       </form>
     </section>
 
-  </main>
+      </main>
+    </div>
   </div>
 
-  <!-- Footer -->
   <footer class="text-center text-gray-500 text-sm py-4">
     Made with 💗 by Lia
   </footer>
 
-  <!-- Confirmation Modal -->
+  <!-- Bottom Right Timer -->
+  <div class="fixed bottom-4 right-4 z-50">
+    <div class="inline-flex items-center gap-2 bg-white border border-gray-200 rounded-lg px-3 py-2 shadow-lg">
+      <div class="flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full">
+        <svg class="w-4 h-4 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+        </svg>
+      </div>
+      <span class="text-sm font-medium text-gray-700">Time Left:</span>
+      <span id="timer" class="text-sm font-semibold text-blue-600 font-mono">02:00:00</span>
+    </div>
+  </div>
+
   <div id="confirmationModal" class="modal-overlay">
     <div class="modal-content">
       <div class="p-6">
@@ -697,11 +666,9 @@
     </div>
   </div>
 
-  <script src="scripts.js"></script>
 
-  <!-- Fallback script for PyCharm compatibility -->
   <script>
-    // Fallback attestation checkbox functionality
+
     document.addEventListener('DOMContentLoaded', function() {
       const certifyCheckbox = document.getElementById('certify');
       const submitBtn = document.getElementById('submitBtn');
@@ -727,16 +694,77 @@
     });
   </script>
 
-  <!-- Timer Display - Bottom Right -->
-  <div class="fixed bottom-4 right-4 bg-white border border-gray-300 rounded-lg p-3 shadow-lg">
-    <div class="flex items-center space-x-2">
-      <svg class="w-4 h-4 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
-      </svg>
-      <span class="text-xs font-medium text-gray-700">Time:</span>
-      <span id="timer" class="text-sm font-bold text-blue-600">00:00:00</span>
-    </div>
-  </div>
+  <script src="scripts.js"></script>
+  <script src="navigation.js"></script>
+
+  <script>
+    let timerInterval;
+
+    function updateTimer() {
+      const startTime = localStorage.getItem('automationStartTime');
+      if (startTime) {
+        const currentTime = Date.now();
+        const elapsedTime = currentTime - parseInt(startTime);
+        const maxTime = 2 * 60 * 60 * 1000;
+        const remainingTime = Math.max(0, maxTime - elapsedTime);
+
+        const hours = Math.floor(remainingTime / 3600000);
+        const minutes = Math.floor((remainingTime % 3600000) / 60000);
+        const seconds = Math.floor((remainingTime % 60000) / 1000);
+
+        const timerElement = document.getElementById('timer');
+        if (timerElement) {
+          timerElement.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+          if (remainingTime === 0) {
+            timerElement.style.color = '#ef4444';
+            timerElement.textContent = '00:00:00 - Time\'s Up!';
+          }
+        }
+      } else {
+        // Timer data was cleared - show error
+        const timerElement = document.getElementById('timer');
+        if (timerElement) {
+          timerElement.style.color = '#ef4444';
+          timerElement.textContent = 'Timer Reset!';
+        }
+      }
+    }
+
+    function startTimer() {
+      // Prevent multiple intervals
+      if (timerInterval) {
+        clearInterval(timerInterval);
+      }
+      updateTimer();
+      timerInterval = setInterval(updateTimer, 1000);
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      startTimer();
+    });
+
+    // Clean up timer only when the page is actually unloaded (not just navigating within challenge)
+    window.addEventListener('beforeunload', function() {
+      // Only clear interval but don't remove localStorage data during navigation
+      if (timerInterval) {
+        clearInterval(timerInterval);
+      }
+    });
+
+    // Ensure timer continues when page regains focus (returning from other pages)
+    window.addEventListener('visibilitychange', function() {
+      if (!document.hidden && !timerInterval) {
+        startTimer();
+      }
+    });
+
+    window.addEventListener('focus', function() {
+      if (!timerInterval) {
+        startTimer();
+      }
+    });
+  </script>
 
 </body>
 </html>

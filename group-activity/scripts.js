@@ -8,7 +8,9 @@ function showNoMessage() {
 }
 
 function startChallenge() {
-  sessionStorage.setItem('formStartTime', Date.now().toString());
+  const startTime = Date.now().toString();
+  sessionStorage.setItem('formStartTime', startTime);
+  localStorage.setItem('automationStartTime', startTime);
 
   window.location.href = 'form.html';
 }
@@ -35,6 +37,13 @@ function initializeSuccessPage() {
 }
 
 function nextPage() {
+  const startTime = localStorage.getItem('automationStartTime') || sessionStorage.getItem('formStartTime');
+  if (startTime && !localStorage.getItem('automationCompletionTime')) {
+    const currentTime = Date.now();
+    const totalTime = currentTime - parseInt(startTime);
+    localStorage.setItem('automationCompletionTime', totalTime.toString());
+  }
+
   createConfetti();
   setTimeout(() => {
     window.location.href = 'congratulations.html';
@@ -193,17 +202,25 @@ function previewImage(file, container) {
 }
 
 function createChildRow(name = '', age = '') {
+  // Use a simple counter for static IDs
+  if (!window.childCounter) window.childCounter = 0;
+  window.childCounter++;
+  const uniqueId = `child_${window.childCounter}`;
+
   const row = document.createElement('div');
   row.className = 'grid grid-cols-1 md:grid-cols-12 gap-2 items-center';
+  row.setAttribute('data-child-id', uniqueId);
 
   const nameDiv = document.createElement('div');
   nameDiv.className = 'md:col-span-6';
   const nameLabel = document.createElement('label');
   nameLabel.className = 'block text-sm font-medium text-gray-700 mb-1';
   nameLabel.textContent = 'Child Name';
+  nameLabel.setAttribute('for', `${uniqueId}_name`);
   const nameIn = document.createElement('input');
   nameIn.type = 'text';
   nameIn.name = 'child_name[]';
+  nameIn.id = `${uniqueId}_name`;
   nameIn.placeholder = 'Enter child name';
   nameIn.value = name;
   nameIn.className = 'w-full';
@@ -242,9 +259,11 @@ function createChildRow(name = '', age = '') {
   const ageLabel = document.createElement('label');
   ageLabel.className = 'block text-sm font-medium text-gray-700 mb-1';
   ageLabel.textContent = 'Age';
+  ageLabel.setAttribute('for', `${uniqueId}_age`);
   const ageIn = document.createElement('input');
   ageIn.type = 'number';
   ageIn.name = 'child_age[]';
+  ageIn.id = `${uniqueId}_age`;
   ageIn.placeholder = 'Age';
   ageIn.value = age;
   ageIn.className = 'w-full';
@@ -327,7 +346,6 @@ function submitApplication() {
     status.className = 'text-sm text-blue-600';
   }
 
-  console.log('Application submitted:', entries);
 
   setTimeout(() => {
     window.location.href = 'success.html';
@@ -353,7 +371,6 @@ function setupDropArea(dropEl, inputEl, previewEl, label) {
 }
 
 function setupNotApplicableCheckboxes() {
-  // Define the field-checkbox mappings
   const notApplicableFields = [
     { checkbox: 'lotNotApplicable', field: 'curr_lot' },
     { checkbox: 'blockNotApplicable', field: 'curr_house' },
@@ -374,26 +391,22 @@ function setupNotApplicableCheckboxes() {
     if (checkboxEl && fieldEl) {
       checkboxEl.addEventListener('change', function() {
         if (this.checked) {
-          // Disable the field and clear its value
           fieldEl.disabled = true;
           fieldEl.value = '';
           fieldEl.style.backgroundColor = '#f3f4f6';
           fieldEl.style.color = '#9ca3af';
           fieldEl.style.cursor = 'not-allowed';
 
-          // Remove required attribute if present
           if (fieldEl.hasAttribute('required')) {
             fieldEl.setAttribute('data-was-required', 'true');
             fieldEl.removeAttribute('required');
           }
         } else {
-          // Enable the field
           fieldEl.disabled = false;
           fieldEl.style.backgroundColor = '#ffffff';
           fieldEl.style.color = '#111827';
           fieldEl.style.cursor = '';
 
-          // Restore required attribute if it was there before
           if (fieldEl.getAttribute('data-was-required') === 'true') {
             fieldEl.setAttribute('required', '');
             fieldEl.removeAttribute('data-was-required');
@@ -485,7 +498,6 @@ function setupFormEventListeners() {
     });
   }
 
-  // Setup "Not Applicable" checkboxes functionality
   setupNotApplicableCheckboxes();
 
   if (sameAsCheckbox) {

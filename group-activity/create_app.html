@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Create Application Form - Automation Challenge</title>
+  <title>Automation Challenge</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="navigation.css">
@@ -11,7 +11,7 @@
 <body class="bg-gray-50 min-h-screen">
   <div class="p-3 min-h-screen flex items-center justify-center">
     <main class="w-full max-w-4xl px-6">
-    <!-- Progress Indicator -->
+
     <div class="mb-8">
       <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-100">
         <div class="flex items-center justify-between mb-3">
@@ -33,7 +33,7 @@
 
     <div class="bg-white shadow-xl rounded-3xl p-16 text-center border border-gray-200 backdrop-blur-sm">
 
-      <!-- Form GIF -->
+
       <div class="flex items-center justify-center mx-auto mb-12">
         <div class="relative">
           <img src="https://media.giphy.com/media/xT9IgzoKnwFNmISR8I/giphy.gif"
@@ -47,7 +47,7 @@
         </div>
       </div>
 
-      <!-- Page Title -->
+
       <div class="mb-8">
         <h1 class="text-5xl font-bold text-gray-900 mb-4">
           <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-blue-600">Ready to Begin!</span>
@@ -57,8 +57,8 @@
         </p>
       </div>
 
-      <!-- Timer Display -->
-      <!-- Instructions -->
+
+
       <div class="bg-gradient-to-br from-slate-50 to-gray-50 border border-gray-200 rounded-2xl p-8 mb-12 shadow-sm text-left">
         <div class="flex items-center mb-6 flex items-center justify-center">
           <!-- <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center shadow-lg mr-3">
@@ -111,9 +111,9 @@
         </div>
       </div>
 
-      <!-- Action Button -->
+
       <div class="flex flex-col sm:flex-row gap-6 justify-center mb-8">
-        <button id="createApplicationBtn" onclick="startChallenge()" class="group relative px-12 py-4 bg-blue-600 text-white text-xl font-bold rounded-xl hover:bg-blue-700 transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl focus:ring-4 focus:ring-blue-200">
+        <button id="createApplicationBtn" onclick="window.location.href='form.html'" class="group relative px-12 py-4 bg-blue-600 text-white text-xl font-bold rounded-xl hover:bg-blue-700 transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl focus:ring-4 focus:ring-blue-200">
           <span class="flex items-center justify-center">
             <svg class="w-6 h-6 mr-3 group-hover:translate-x-1 transition-transform" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clip-rule="evenodd"></path>
@@ -123,7 +123,7 @@
         </button>
       </div>
 
-      <!-- Back Link -->
+
       <div class="border-t pt-6">
         <p class="text-gray-500">
           Changed your mind?
@@ -135,7 +135,6 @@
   </main>
   </div>
 
-  <!-- Footer -->
   <footer class="text-center text-gray-500 text-sm py-4">
     Made with 💗 by Lia
   </footer>
@@ -150,42 +149,76 @@
       if (startTime) {
         const currentTime = Date.now();
         const elapsedTime = currentTime - parseInt(startTime);
-        const hours = Math.floor(elapsedTime / 3600000);
-        const minutes = Math.floor((elapsedTime % 3600000) / 60000);
-        const seconds = Math.floor((elapsedTime % 60000) / 1000);
+        const maxTime = 2 * 60 * 60 * 1000;
+        const remainingTime = Math.max(0, maxTime - elapsedTime);
+
+        const hours = Math.floor(remainingTime / 3600000);
+        const minutes = Math.floor((remainingTime % 3600000) / 60000);
+        const seconds = Math.floor((remainingTime % 60000) / 1000);
 
         const timerElement = document.getElementById('timer');
         if (timerElement) {
           timerElement.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+          if (remainingTime === 0) {
+            timerElement.style.color = '#ef4444';
+            timerElement.textContent = '00:00:00 - Time\'s Up!';
+          }
         }
       } else {
-        // If no start time exists, start the timer now (in case user navigated directly to this page)
-        localStorage.setItem('automationStartTime', Date.now().toString());
+        // Timer data was cleared - show error
+        const timerElement = document.getElementById('timer');
+        if (timerElement) {
+          timerElement.style.color = '#ef4444';
+          timerElement.textContent = 'Timer Reset!';
+        }
       }
     }
 
-    // Start the timer when page loads
-    document.addEventListener('DOMContentLoaded', function() {
+    function startTimer() {
+      // Prevent multiple intervals
+      if (timerInterval) {
+        clearInterval(timerInterval);
+      }
       updateTimer();
       timerInterval = setInterval(updateTimer, 1000);
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      startTimer();
     });
 
-    // Clear timer when navigating away (optional - keeps it running across tabs)
+    // Clean up timer only when the page is actually unloaded (not just navigating within challenge)
     window.addEventListener('beforeunload', function() {
+      // Only clear interval but don't remove localStorage data during navigation
       if (timerInterval) {
         clearInterval(timerInterval);
       }
     });
+
+    // Ensure timer continues when page regains focus (returning from other pages)
+    window.addEventListener('visibilitychange', function() {
+      if (!document.hidden && !timerInterval) {
+        startTimer();
+      }
+    });
+
+    window.addEventListener('focus', function() {
+      if (!timerInterval) {
+        startTimer();
+      }
+    });
   </script>
 
-  <!-- Timer Display - Bottom Right -->
-  <div class="fixed bottom-4 right-4 bg-white border border-gray-300 rounded-lg p-3 shadow-lg">
-    <div class="flex items-center space-x-2">
-      <svg class="w-4 h-4 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
-      </svg>
-      <span class="text-xs font-medium text-gray-700">Time:</span>
-      <span id="timer" class="text-sm font-bold text-blue-600">00:00:00</span>
+  <div class="fixed bottom-4 right-4 z-50">
+    <div class="inline-flex items-center gap-2 bg-white border border-gray-200 rounded-lg px-3 py-2 shadow-lg">
+      <div class="flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full">
+        <svg class="w-4 h-4 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+        </svg>
+      </div>
+      <span class="text-sm font-medium text-gray-700">Time Left:</span>
+      <span id="timer" class="text-sm font-semibold text-blue-600 font-mono">02:00:00</span>
     </div>
   </div>
 
